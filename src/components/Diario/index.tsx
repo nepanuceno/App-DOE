@@ -14,6 +14,8 @@ interface Params {
 }
 
 const Diario = (props: Params) => {
+
+    const uri = `https://doe.to.gov.br/diario/${props.id}/imagem`;
     
     return (
         <View style={styles.container}>
@@ -23,7 +25,7 @@ const Diario = (props: Params) => {
             <View style={styles.diario} >
                 <View style={styles.pagina}>
                     <Image 
-                        source={{ uri: 'https://doe.to.gov.br/diario/4967/imagem' }} 
+                        source={{ uri: uri }} 
                         style={styles.tinyLogo} />
                 </View>
             </View>

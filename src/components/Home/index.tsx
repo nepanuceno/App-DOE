@@ -3,6 +3,7 @@ import { FlatList, SafeAreaView, TouchableOpacity, View, Text, StyleSheet, Image
 import Diario from '../Diario';
 import { useGetDiarios } from "../../useGetDiarios";
 import styles from "./styles";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 const Separator = () => {
     return <View style={styles.separator} />;
@@ -38,10 +39,12 @@ const Home = ({ navigation }) => {
                         activeOpacity={0.7}
                         onPress={() => onPress(item.id)}
                         style={styles.touchableOpacityStyle}>
-                        <Image
+                        {/* <Image
                             source={require('../../images/livro-do-circulo-aberto_36pt_2x.png')}
                             style={styles.floatingButtonStyle}
-                        />
+                        /> */}
+                        <MaterialCommunityIcons name="book-open-variant" color='#0000F0' size={60} />
+
                     </TouchableOpacity>
                     <Separator />
                 </View>

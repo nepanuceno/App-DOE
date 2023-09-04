@@ -3,6 +3,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import MyHomeStack from "./MyHomeStack";
 import SettingsScreen from "./SettingsScreen";
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Tab = createBottomTabNavigator();
 
