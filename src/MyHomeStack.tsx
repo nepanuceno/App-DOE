@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import Home from './Home';
+import Home from './components/Home';
 import ViewDoe from './ViewDoe';
 
 const Stack = createNativeStackNavigator();

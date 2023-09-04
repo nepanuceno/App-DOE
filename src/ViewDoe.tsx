@@ -21,7 +21,8 @@ const ViewDoe = ({ route, navigation }) => {
     console.log("Route:", route.params);
 
     const { id } = route.params;
-    const source = { uri: `https://doe.to.gov.br/diario/${ id }/download`, cache: true };
+    const uri = `https://doe.to.gov.br/diario/${ id }/download`;
+    const source = { uri: uri , cache: true };
 
     return (
         <View style={styles.container}>
