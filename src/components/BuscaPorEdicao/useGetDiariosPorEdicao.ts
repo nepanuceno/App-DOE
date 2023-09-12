@@ -4,12 +4,11 @@ import axios from 'axios';
 export const useGetDiarios = () => {
     const [dados, newDados] = useState();
     
-    const baseUrl = 'https://diariooficial.to.gov.br/api.json';
+    const baseUrl = 'http://localhost:8080';
     useEffect(() => {
-        console.log("Buscando Diários recentes");
-        // Passing configuration object to axios
+        console.log("Buscando Diários por Edição");
         axios({
-          method: 'get',
+          method: 'post',
           url: `${baseUrl}`,
         }).then((response) => {
             if(response.status === 200){

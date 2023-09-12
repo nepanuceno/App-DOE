@@ -3,7 +3,9 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import MyHomeStack from "./MyHomeStack";
 import SettingsScreen from "./SettingsScreen";
-import Icon from 'react-native-vector-icons/FontAwesome';
+import BuscaPorTexto from './components/BuscaPorTexto';
+import BuscaPorDoc from './components/BuscaPorDoc';
+import BuscaPorEdicao from './components/BuscaPorEdicao';
 
 const Tab = createBottomTabNavigator();
 
@@ -19,6 +21,42 @@ const MyTabs = () => {
                         <MaterialCommunityIcons name="home" color={color} size={24} />
                     ),
                 }
+              }
+          />
+          <Tab.Screen 
+              name="Busca Por Texto"
+              component={BuscaPorTexto}
+              options={
+                  {
+                      tabBarLabel: 'Por Texto',
+                      tabBarIcon: ({ color }) => (
+                      <MaterialCommunityIcons name="text-box-search-outline" color={color} size={24} />
+                  ),
+                  }
+              }
+          />
+          <Tab.Screen 
+              name="Busca Por Documento"
+              component={BuscaPorDoc}
+              options={
+                  {
+                      tabBarLabel: 'Por Documento',
+                      tabBarIcon: ({ color }) => (
+                      <MaterialCommunityIcons name="file-search" color={color} size={24} />
+                  ),
+                  }
+              }
+          />
+          <Tab.Screen 
+              name="Busca Por Edição"
+              component={BuscaPorEdicao}
+              options={
+                  {
+                      tabBarLabel: 'Por Edição',
+                      tabBarIcon: ({ color }) => (
+                      <MaterialCommunityIcons name="layers-search" color={color} size={24} />
+                  ),
+                  }
               }
           />
           <Tab.Screen 

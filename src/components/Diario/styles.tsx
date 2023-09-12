@@ -21,8 +21,8 @@ const styles = StyleSheet.create({
     tinyLogo: {
         flex: 1,
         justifyContent: 'space-between',
-        width: 270,
-        height: 350,
+        width: 320,
+        height: 450,
     },
     pagina: {
         padding: 0,
