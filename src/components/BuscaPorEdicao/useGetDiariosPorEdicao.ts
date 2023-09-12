@@ -8,11 +8,12 @@ export const useGetDiariosPorEdicao = () => {
     useEffect(() => {
         console.log("Buscando Diários por Edição");
         axios({
+          headers: { 'Content-Type': 'multipart/form-data' },
           method: 'post',
           url: `${baseUrl}`,
           data: {
-            por:'texto',
-            texto: 'Paulo Roberto Torres',
+            por:'edicao',
+            edicao: 6390,
           }
         }).then((response) => {
             if(response.status === 200 && response.data.status == true){
