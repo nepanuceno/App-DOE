@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
 
-export const useGetDiarios = () => {
+export const useGetDiariosPorEdicao = () => {
     const [dados, newDados] = useState();
     
     const baseUrl = 'http://localhost:8080';
@@ -10,13 +10,16 @@ export const useGetDiarios = () => {
         axios({
           method: 'post',
           url: `${baseUrl}`,
+          data: {
+            por:'texto',
+            texto: 'Paulo Roberto Torres',
+          }
         }).then((response) => {
-            if(response.status === 200){
-                newDados(response.data)
-                console.log("#######################")
-              }else{
-                console.log(response)
-              }
+            if(response.status === 200 && response.data.status == true){
+              newDados(response.data.diarios);
+            }else{
+              console.log(response)
+            }
         });
     }, []);
 

@@ -1,5 +1,6 @@
 import { Image, Text, View } from "react-native";
 import styles from "./styles";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 interface Params {
     id: string,
@@ -33,7 +34,10 @@ const Diario = (props: Params) => {
                 <Text style={styles.textComandos}>Nº: {props.edicao}</Text>
                 <Text style={styles.textComandos}>{props.paginas} pág</Text>
                 <Text style={styles.textComandos}>{props.downloads} </Text>
-                <Text style={styles.textComandos}>{props.tamanho}</Text>
+                <Text style={styles.textComandos}>
+                    {props.tamanho}
+                    <MaterialCommunityIcons name="download" color='#FFF' size={22} />
+                </Text>
             </View>
         </View>
     );

@@ -14,7 +14,7 @@ export const useGetDiarios = () => {
         }).then((response) => {
             if(response.status === 200){
                 newDados(response.data)
-                console.log("#######################")
+                console.log("#######################DOE##################");
               }else{
                 console.log(response)
               }
