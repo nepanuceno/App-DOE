@@ -1,9 +1,9 @@
-import { useGetDiariosPorEdicao } from "./useGetDiariosPorEdicao";
+import { useGetDiariosPorEdicao } from "../../useGetDiariosPorEdicao";
 import { FlatList, SafeAreaView, TouchableOpacity, View } from "react-native";
 
 import React from "react";
 import Diario from '../Diario';
-import styles from "./styles";
+import styles from "../../styles/styles";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 

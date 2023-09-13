@@ -2,7 +2,7 @@ import { FlatList, SafeAreaView, TouchableOpacity, View, Text, StyleSheet, Image
 
 import Diario from '../Diario';
 import { useGetDiarios } from "../../useGetDiarios";
-import styles from "./styles";
+import styles from "../../styles/styles";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 const Separator = () => {
