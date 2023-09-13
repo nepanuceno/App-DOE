@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
 
-export const useGetDiariosPorEdicao = () => {
+export const useGetDiariosPorEdicao = (parametrosDaConsulta:object) => {
     const [dados, newDados] = useState();
     
     const baseUrl = 'http://localhost:8080';
@@ -11,10 +11,7 @@ export const useGetDiariosPorEdicao = () => {
           headers: { 'Content-Type': 'multipart/form-data' },
           method: 'post',
           url: `${baseUrl}`,
-          data: {
-            por:'edicao',
-            edicao: 6390,
-          }
+          data: parametrosDaConsulta,
         }).then((response) => {
             if(response.status === 200 && response.data.status == true){
               newDados(response.data.diarios);

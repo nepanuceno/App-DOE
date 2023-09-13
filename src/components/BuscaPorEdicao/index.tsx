@@ -1,4 +1,4 @@
-import { useGetDiariosPorEdicao } from "../../useGetDiariosPorEdicao";
+import { useGetDiariosPorEdicao } from "../../useGetDiariosPorConsulta";
 import { FlatList, SafeAreaView, TouchableOpacity, View } from "react-native";
 
 import React from "react";
@@ -8,10 +8,8 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 
 
 const SettingsScreen = ({ navigation }) => {
-    const dados = useGetDiariosPorEdicao();
-
-    console.log("DADOS: ", dados.dados);
-
+    const parametrosDaConsulta = { por:'edicao', edicao: 6390 }
+    const dados = useGetDiariosPorEdicao(parametrosDaConsulta);
     const onPress = (id: number) => {
         console.log('Abrindo Diario Oficial');
         navigation.navigate('DOE Detalhado', {name: 'ViewDoe', id: id});
