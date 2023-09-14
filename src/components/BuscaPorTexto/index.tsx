@@ -8,7 +8,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 
 
 const SettingsScreen = ({ navigation }) => {
-    const parametrosDaConsulta = { por:'texto', texto:'107947', data_inicial:'2023-08-01', data_final:'2023-09-13' }
+    const parametrosDaConsulta = { por:'texto', texto:'107947', 'data-inicial':'2023-08-01', 'data-final':'2023-09-13' }
     const dados = useGetDiariosPorEdicao(parametrosDaConsulta);
     const onPress = (id: number) => {
         console.log('Abrindo Diario Oficial');

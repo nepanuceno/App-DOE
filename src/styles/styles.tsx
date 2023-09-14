@@ -27,6 +27,11 @@ const styles = StyleSheet.create({
         width: 50,
         height: 50,
     },
+    input: {
+        height: 40,
+        margin: 10,
+        
+    },
 });
 
 export default styles;

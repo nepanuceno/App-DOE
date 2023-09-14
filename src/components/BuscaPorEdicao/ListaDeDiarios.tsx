@@ -1,32 +1,27 @@
-import { FlatList, SafeAreaView, TouchableOpacity, View, Text, StyleSheet, Image } from "react-native";
+import { useGetDiariosPorEdicao } from "../../useGetDiariosPorConsulta";
+import { FlatList, SafeAreaView, TouchableOpacity, View } from "react-native";
 
+import React from "react";
 import Diario from '../Diario';
-import { useGetDiarios } from "../../useGetDiarios";
 import styles from "../../styles/styles";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-const Separator = () => {
-    return <View style={styles.separator} />;
-}
 
-const Home = ({ navigation }) => {
-    const {dados} = useGetDiarios();
-    console.log("Navigation: ",navigation);
-    console.log(dados);
-
+const ListaDeDiarios = ({ navigation }) => {
+    const parametrosDaConsulta = { por:'edicao', edicao: 6408 }
+    const dados = useGetDiariosPorEdicao(parametrosDaConsulta);
     const onPress = (id: number) => {
-        console.log('Testes');
         navigation.navigate('DOE Detalhado', {name: 'ViewDoe', id: id});
     }
 
     return (
         <SafeAreaView>
-            <FlatList data={dados} renderItem={({item}) => (
+            <FlatList data={dados.dados} renderItem={({item}) => (
                 <View>
                     <Diario
                         id={item.id} 
                         edicao={item.edicao} 
-                        data={item.data} 
+                        data={item.data_publicacao} 
                         suplemento={item.suplemento} 
                         paginas={item.paginas} 
                         tamanho={item.tamanho} 
@@ -39,14 +34,13 @@ const Home = ({ navigation }) => {
                         activeOpacity={0.7}
                         onPress={() => onPress(item.id)}
                         style={styles.touchableOpacityStyle}>
-                        <MaterialCommunityIcons name="book-open-variant" color='#0000F0' size={60} />
+                        <MaterialCommunityIcons name="book-open-variant" color='#5499C7' size={60} />
                     </TouchableOpacity>
-                    <Separator />
+                    {/* <Separator /> */}
                 </View>
             ) } />
         </SafeAreaView>
-        
-    )
+    );
 };
 
-export default Home;
+export default ListaDeDiarios;
