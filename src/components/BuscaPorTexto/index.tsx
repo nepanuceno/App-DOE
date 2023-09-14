@@ -37,12 +37,14 @@ const SettingsScreen = ({ navigation }) => {
             label={'Data Inicial'}
             value={dataInicial}
             onChangeText={(newDate) => updateDataInicial(newDate)}
+            left={<TextInput.Icon icon="calendar" />}
             />
 
 <TextInput 
             label={'Data Final'}
             value={dataFinal}
             onChangeText={(newDate) => updateDataFinal(newDate)}
+            left={<TextInput.Icon icon="calendar" />}
             />
             <Button buttonColor="#0000FF" textColor="#FFF" onPress={() => consultaDiario()}>Consultar</Button>
             <ListaDiarios dados={ objDiario } navigation={ navigation }  />

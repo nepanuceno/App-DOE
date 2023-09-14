@@ -3,7 +3,8 @@ import { SafeAreaView } from "react-native";
 
 import React, { useState } from "react";
 import ListaDiarios from "../ListaDiarios";
-import { Button, TextInput } from "react-native-paper";
+
+import { Button, TextInput, Searchbar } from "react-native-paper";
 
 const SettingsScreen = ({ navigation }) => {
 
@@ -24,7 +25,7 @@ const SettingsScreen = ({ navigation }) => {
     console.log(objDiario)
     return (
         <SafeAreaView>
-            <TextInput 
+            <Searchbar 
             label={'Edição'}
             value={edicao}
             onChangeText={(newEdicao) => updateEdicao(newEdicao)}
