@@ -3,17 +3,20 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 
 import Diario from "../Diario";
 import styles from "../../styles/styles";
-import { object } from "yup";
 
 interface Params {
-    dados: object,
+    dados: Array<object>,
+    navigation: object
 };
 
 const ListaDiarios = ( props: Params ) => {
+    const onPress = (id: number) => {
+        console.log('Abrindo Diario Oficial');
+        props.navigation.navigate('DOE Detalhado', {name: 'ViewDoe', id: id});
+    }
 
-    
     return (
-        <FlatList data={props} renderItem={({item}) => (
+        <FlatList data={props.dados} renderItem={({item}) => (
             <View>
                 <Diario
                     id={item.id} 
