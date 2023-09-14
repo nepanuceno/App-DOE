@@ -21,7 +21,7 @@ const ListaDiarios = ( props: Params ) => {
                 <Diario
                     id={item.id} 
                     edicao={item.edicao} 
-                    data={item.data} 
+                    data={item.data_publicacao} 
                     suplemento={item.suplemento} 
                     paginas={item.paginas} 
                     tamanho={item.tamanho} 

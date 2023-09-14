@@ -1,24 +1,51 @@
-import { useGetDiariosPorEdicao } from "../../useGetDiariosPorConsulta";
-import { FlatList, SafeAreaView, TouchableOpacity, View } from "react-native";
+import { useGetDiariosPorConsulta } from "../../useGetDiariosPorConsulta";
+import { SafeAreaView } from "react-native";
 
-import React from "react";
-import Diario from '../Diario';
-import styles from "../../styles/styles";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import React, { useState } from "react";
 import ListaDiarios from "../ListaDiarios";
+import { Button, TextInput } from "react-native-paper";
 
 
 const SettingsScreen = ({ navigation }) => {
-    const parametrosDaConsulta = { por:'texto', texto:'107947', 'data-inicial':'2023-08-01', 'data-final':'2023-09-13' }
-    const dados = useGetDiariosPorEdicao(parametrosDaConsulta).dados;
-    const onPress = (id: number) => {
-        console.log('Abrindo Diario Oficial');
-        navigation.navigate('DOE Detalhado', {name: 'ViewDoe', id: id});
-    }
+    const baseUrl = 'http://localhost:8080';    
+    
+    const [objDiario, setDiario] = useState({});
+    const [texto, updateTexto] = useState('');
+    const [dataInicial, updateDataInicial] = useState('');
+    const [dataFinal, updateDataFinal] = useState('');
+    
+    const parametrosDaConsulta = { por:'texto', texto: texto, 'data-inicial': dataInicial, 'data-final': dataFinal}
+   
+    const consultaDiario = () => {
+        // const parametrosDaConsulta = { por:'texto', texto: texto }
+        console.log("Buscando Diários por Texto");
 
+        useGetDiariosPorConsulta(parametrosDaConsulta, baseUrl).then(data => {
+            console.log(data.diarios)
+            setDiario(data.diarios);
+        }).catch(err => console.log(err));
+    }
     return (
         <SafeAreaView>
-            <ListaDiarios dados={ dados } navigation={ navigation }  />
+            <TextInput 
+            label={'Texto'}
+            value={texto}
+            onChangeText={(newText) => updateTexto(newText)}
+            />
+
+<TextInput 
+            label={'Data Inicial'}
+            value={dataInicial}
+            onChangeText={(newDate) => updateDataInicial(newDate)}
+            />
+
+<TextInput 
+            label={'Data Final'}
+            value={dataFinal}
+            onChangeText={(newDate) => updateDataFinal(newDate)}
+            />
+            <Button buttonColor="#0000FF" textColor="#FFF" onPress={() => consultaDiario()}>Consultar</Button>
+            <ListaDiarios dados={ objDiario } navigation={ navigation }  />
         </SafeAreaView>
     );
 };

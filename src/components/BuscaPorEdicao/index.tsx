@@ -14,10 +14,9 @@ const SettingsScreen = ({ navigation }) => {
     
     const consultaDiario = () => {
         const parametrosDaConsulta = { por:'edicao', edicao: edicao }
-        const baseUrl = 'http://localhost:8080';
         console.log("Buscando Diários por Edição");
 
-        useGetDiariosPorConsulta(parametrosDaConsulta).then(data => {
+        useGetDiariosPorConsulta(parametrosDaConsulta, baseUrl).then(data => {
             console.log(data)
             setDiario(data.diarios);
         }).catch(err => console.log(err));
