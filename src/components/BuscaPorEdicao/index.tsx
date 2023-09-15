@@ -20,7 +20,7 @@ const SettingsScreen = ({ navigation }) => {
         useGetDiariosPorConsulta(parametrosDaConsulta, baseUrl).then(data => {
             console.log(data)
             setDiario(data.diarios);
-        }).catch(err => console.log(err));
+        }).catch(err => console.log(err.request));
     }
     console.log(objDiario)
     return (

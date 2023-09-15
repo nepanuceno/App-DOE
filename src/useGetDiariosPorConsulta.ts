@@ -10,6 +10,6 @@ export const useGetDiariosPorConsulta = (parametrosDaConsulta:object, baseUrl:st
     });
     
     const resp =  promise.then((response) => response.data );
-
+    
     return resp;
 }
