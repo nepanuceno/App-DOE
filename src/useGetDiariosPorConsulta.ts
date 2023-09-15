@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const useGetDiariosPorConsulta = (parametrosDaConsulta:object, baseUrl:string) => {    
-    console.log("Buscando Diários por Consulta");
+    console.log("Buscando Diários por Consulta", parametrosDaConsulta);
     const promise = axios({
       headers: { 'Content-Type': 'multipart/form-data' },
       method: 'post',

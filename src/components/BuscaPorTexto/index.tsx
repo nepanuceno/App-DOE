@@ -11,10 +11,13 @@ import DatePicker from "react-native-date-picker";
 
 const SettingsScreen = ({ navigation }) => {
     const baseUrl = 'http://localhost:8080';    
-    
+
+    const date = new Date();
+    date.setDate(date.getDate() - 60);
+
     const [objDiario, setDiario] = useState({});
     const [texto, updateTexto] = useState('');
-    const [dataInicial, updateDataInicial] = useState(new Date());
+    const [dataInicial, updateDataInicial] = useState(date);
     const [dataFinal, updateDataFinal] = useState(new Date());
     const [tagDataInicial, openDataInicial] = useState(false);
     const [tagDataFinal, openDataFinal] = useState(false);
@@ -28,63 +31,56 @@ const SettingsScreen = ({ navigation }) => {
 
         useGetDiariosPorConsulta(parametrosDaConsulta, baseUrl)
         .then(data => {
+            console.log(data)
             setDiario(data.diarios);
         }).catch(err => console.log(err.message));
     }
     return (
-        <SafeAreaView style={{ backgroundColor: theme.colors.primary }}>
+        <SafeAreaView>
             <Text>Consulta Por Edição</Text>
             <TextInput 
                 label={'Texto'}
                 value={texto}
                 onChangeText={(newText) => updateTexto(newText)}
-                style={style.inputs}
             />
 
-            <Button buttonColor="#148F77" textColor="#FFF" mode="elevated" onPress={() => openDataInicial(true)}>Data Inicial</Button>
+            <Button theme={{ colors: theme.colors.primary }} buttonColor="#148F77" textColor="#FFF" mode="elevated" onPress={() => openDataInicial(true)}>Data Inicial</Button>
             <Button buttonColor="#148F77" textColor="#FFF" mode="elevated" onPress={() => openDataFinal(true)}>Data Final</Button>
 
             <DatePicker
                 modal
+                title='Data Inicial'
                 open={tagDataInicial}
                 date={dataInicial} 
                 mode="date"
-                locale="pt_BR"
+                locale={'pt_BR'} 
                 onConfirm={(date) => {
+                    console.log("DAta:", date);
                     openDataInicial(false)
-                    updateDataInicial(dataInicial)
+                    updateDataInicial(date)
                 }}
                 onCancel={ () => { openDataInicial(false)}}
+                confirmText="Confirma"
+                cancelText="Cancela"
             />
 
             <DatePicker
                 modal
+                title='Data Final'
                 open={tagDataFinal}
                 date={dataFinal} 
                 mode="date"
                 locale="pt_BR"
                 onConfirm={(date) => {
                     openDataFinal(false)
-                    updateDataFinal(dataFinal)
+                    updateDataFinal(date)
                 }}
                 onCancel={ () => { openDataFinal(false)}}
-
+                confirmText="Confirma"
+                cancelText="Cancela"
             />
 
-            {/* <TextInput 
-                label={'Data Inicial'}
-                value={dataInicial}
-                onChangeText={(newDate) => updateDataInicial(newDate)}
-                left={<TextInput.Icon icon="calendar" />}
-            /> */}
-
-            {/* <TextInput 
-                label={'Data Final'}
-                value={dataFinal}
-                onChangeText={(newDate) => updateDataFinal(newDate)}
-                left={<TextInput.Icon icon="calendar" />}
-            /> */}
-            <Button buttonColor="#0000FF" textColor="#FFF" onPress={() => consultaDiario()}>Consultar</Button>
+            <Button mode="contained" onPress={() => consultaDiario()}>Consultar</Button>
             <ListaDiarios dados={ objDiario } navigation={ navigation }  />
         </SafeAreaView>
     );
