@@ -1,14 +1,11 @@
 import { useGetDiariosPorConsulta } from "../../useGetDiariosPorConsulta";
-import { SafeAreaView } from "react-native";
+import { SafeAreaView, StatusBar } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Button, Searchbar, ThemeProvider, Provider, Surface, Appbar, DefaultTheme } from "react-native-paper";
 
-import React, { useState } from "react";
-import ListaDiarios from "../ListaDiarios";
+const BuscaPorEdicao = ({ navigation }) => {
 
-import { Button, TextInput, Searchbar } from "react-native-paper";
-
-const SettingsScreen = ({ navigation }) => {
-
-    const [objDiario, setDiario] = useState({});
+    const [objDiario, setDiario] = useState(undefined);
     const [edicao, updateEdicao] = useState('');
 
     const baseUrl = 'http://localhost:8080';    
@@ -22,18 +19,38 @@ const SettingsScreen = ({ navigation }) => {
             setDiario(data.diarios);
         }).catch(err => console.log(err.request));
     }
-    console.log(objDiario)
+
+    useEffect(() => {
+        if (objDiario != undefined){
+            navigation.navigate('Resultado', {name: 'ResultDiarios', objDiarios: objDiario});
+        }
+    }, [objDiario]);
+    
+    // console.log(objDiario)
     return (
-        <SafeAreaView>
-            <Searchbar 
-            label={'Edição'}
-            value={edicao}
-            onChangeText={(newEdicao) => updateEdicao(newEdicao)}
-            />
-            <Button buttonColor="#0000FF" textColor="#FFF" onPress={() => consultaDiario()}>Consultar</Button>
-           <ListaDiarios dados={ objDiario } navigation={ navigation }  />
-        </SafeAreaView>
+        <Provider theme={ DefaultTheme }>
+            <ThemeProvider theme={ DefaultTheme }>
+                <StatusBar 
+                    backgroundColor={DefaultTheme.colors.primary}
+                />
+                <Surface>
+                    <Appbar.Header>
+                        {/* <Appbar.BackAction onPress={()=>{ console.log('GoBack')}} /> */}
+                        <Appbar.Content title="Consulta por Edição" />
+                    </Appbar.Header>
+                    <SafeAreaView>
+                        <Searchbar 
+                        label={'Edição'}
+                        value={edicao}
+                        onChangeText={(newEdicao) => updateEdicao(newEdicao)}
+                        />
+                        <Button buttonColor="#0000FF" textColor="#FFF" onPress={() => consultaDiario()}>Consultar</Button>
+                        {/* <ListaDiarios dados={ objDiario } navigation={ navigation }  /> */}
+                    </SafeAreaView>
+                </Surface>
+            </ThemeProvider>
+        </Provider>
     );
 };
 
-export default SettingsScreen;
+export default BuscaPorEdicao;

@@ -1,30 +1,23 @@
 import { useGetDiariosPorConsulta } from "../../useGetDiariosPorConsulta";
-import { FlatList, SafeAreaView, StatusBar, TouchableOpacity, View } from "react-native";
-import { Appbar, Button, DefaultTheme, Provider, TextInput, ThemeProvider } from "react-native-paper";
+import { SafeAreaView, StatusBar } from "react-native";
+import { Appbar, Button, DefaultTheme, Provider, Surface, TextInput, ThemeProvider, useTheme } from "react-native-paper";
 
 import React, { useEffect, useState } from "react";
-import Diario from '../Diario';
-import styles from "../../styles/styles";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import ListaDiarios from "../ListaDiarios";
 import DropDown from "react-native-paper-dropdown";
 
 
-const SettingsScreen = ({ navigation }) => {
+const BuscaPorDoc = ({ navigation }) => {
 
-    const [objDiarios, setObjDiarios] = useState({});
+    const [objDiarios, setObjDiarios] = useState(undefined);
     const [numDoc, setNumDoc] = useState('');
     const [numTipoDoc, setNumTipoDoc] = useState(6);
     const [showDropDownTipoDoc, setShowDropDownTipoDoc] = useState(false);
+    const theme = useTheme();
 
-    
-    // useEffect( () => {
-        
-        // }, []);
-        
-        const sendParams = () => {
-            const parametrosDaConsulta = { por:'doc', 'tipo-documento': numTipoDoc, numero: numDoc }
-            const baseUrl = 'http://localhost:8080';    
+    const sendParams = () => {
+        const parametrosDaConsulta = { por:'doc', 'tipo-documento': numTipoDoc, numero: numDoc }
+        const baseUrl = 'http://localhost:8080';    
         const dados = useGetDiariosPorConsulta(parametrosDaConsulta, baseUrl)
             .then(data => {
                 console.log(data)
@@ -32,43 +25,45 @@ const SettingsScreen = ({ navigation }) => {
             }).catch(err => console.log(err.message));
     }
 
-    return (
-        <Provider>
+    useEffect(() => {
+        if (objDiarios != undefined){
+            navigation.navigate('Resultado', {name: 'ResultDiarios', objDiarios: objDiarios});
+        }
+    }, [objDiarios]);
 
-            <ThemeProvider>
+    return (
+        <Provider theme={ DefaultTheme }>
+            <ThemeProvider theme={ DefaultTheme }>
                 <StatusBar 
                     backgroundColor={DefaultTheme.colors.primary}
-                    barStyle={"light-content"}
+                    // barStyle={"light-content"}
                 />
-
-                <Appbar.Header>
-                    
-                </Appbar.Header>
-
-                <SafeAreaView>
-                    <DropDown
-                    label={"Tipos de Documento"}
-                    mode={"outlined"}
-                    visible={showDropDownTipoDoc} 
-                    onDismiss={ () => setShowDropDownTipoDoc(true) } 
-                    showDropDown={ () => setShowDropDownTipoDoc(false) } 
-                    value={undefined} setValue={function (_value: any): void {
-                        throw new Error("Function not implemented.");
-                    } } 
-                    list={listaDeTiposDeDocumento}            
-                    />
-                    <TextInput 
-                        label="Número do Documento"
-                        value={numDoc}
-                        onChangeText={(num) => setNumDoc(num)}
-                    />
-                    <Button mode="contained" onPress={() => sendParams()}>Consultar Diários</Button>
-                    <ListaDiarios dados={ objDiarios } navigation={ navigation }  />
-                </SafeAreaView>
+                <Surface>
+                    <Appbar.Header theme={ { colors: {primary: 'green' } }}>
+                        {/* <Appbar.BackAction onPress={()=>{ console.log('GoBack')}} /> */}
+                        <Appbar.Content title="Consulta por Documento" />
+                    </Appbar.Header>
+                        <SafeAreaView>
+                            <DropDown
+                                label={"Tipos de Documento"}
+                                mode={"flat"}
+                                visible={showDropDownTipoDoc} 
+                                onDismiss={ () => setShowDropDownTipoDoc(false) } 
+                                showDropDown={ () => setShowDropDownTipoDoc(true) } 
+                                value={numTipoDoc}
+                                setValue={setNumTipoDoc}
+                                list={listaDeTiposDeDocumento}      
+                            />
+                            <TextInput 
+                                label="Número do Documento"
+                                value={numDoc}
+                                onChangeText={(num) => setNumDoc(num)}
+                            />
+                            <Button icon="magnify" mode="contained" onPress={() => sendParams()}>Consultar Diários</Button>
+                        </SafeAreaView>
+                </Surface>
             </ThemeProvider>
-
         </Provider>
-
     );
 };
 
@@ -100,4 +95,4 @@ const listaDeTiposDeDocumento = [
     
 ]
 
-export default SettingsScreen;
+export default BuscaPorDoc;

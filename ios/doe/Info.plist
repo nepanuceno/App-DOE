@@ -53,6 +53,7 @@
 		<string>fonts/MaterialIcons</string>
 		<string>fonts/AntDesign</string>
 		<string>fonts/Entypo</string>
+		<string>fonts/Ionicons</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

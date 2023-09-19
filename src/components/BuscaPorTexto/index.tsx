@@ -1,21 +1,19 @@
 import { useGetDiariosPorConsulta } from "../../useGetDiariosPorConsulta";
-import { SafeAreaView, StyleSheet } from "react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
-import { useTheme, withTheme } from "react-native-paper";
+import { SafeAreaView, StatusBar, StyleSheet } from "react-native";
+import { Appbar, Provider, Surface, ThemeProvider, DefaultTheme, useTheme, withTheme } from "react-native-paper";
 
-import React, { useState } from "react";
-import ListaDiarios from "../ListaDiarios";
+import React, { useEffect, useState } from "react";
 import { Button, Text, TextInput } from "react-native-paper";
 import DatePicker from "react-native-date-picker";
 
 
-const SettingsScreen = ({ navigation }) => {
+const BuscaPorTexto = ({ navigation }) => {
     const baseUrl = 'http://localhost:8080';    
 
     const date = new Date();
     date.setDate(date.getDate() - 60);
 
-    const [objDiario, setDiario] = useState({});
+    const [objDiario, setDiario] = useState(undefined);
     const [texto, updateTexto] = useState('');
     const [dataInicial, updateDataInicial] = useState(date);
     const [dataFinal, updateDataFinal] = useState(new Date());
@@ -27,62 +25,93 @@ const SettingsScreen = ({ navigation }) => {
     const consultaDiario = () => {
         console.log("Buscando Diários por Texto");
 
-        // const parametrosDaConsulta = { por:'texto', texto: "107947", 'data-inicial': "2023-06-15", 'data-final': "2023-09-15"}
-
         useGetDiariosPorConsulta(parametrosDaConsulta, baseUrl)
         .then(data => {
             console.log(data)
             setDiario(data.diarios);
         }).catch(err => console.log(err.message));
     }
+
+    useEffect(() => {
+        if (objDiario != undefined){
+            navigation.navigate('Resultado', {name: 'ResultDiarios', objDiarios: objDiario});
+        }
+    }, [objDiario]);
+    
     return (
-        <SafeAreaView>
-            <Text>Consulta Por Edição</Text>
-            <TextInput 
-                label={'Texto'}
-                value={texto}
-                onChangeText={(newText) => updateTexto(newText)}
-            />
+        <Provider theme={ DefaultTheme }>
+            <ThemeProvider theme={ DefaultTheme }>
+                <StatusBar 
+                    backgroundColor={DefaultTheme.colors.primary}
+                />
+                <Surface>
+                    <Appbar.Header>
+                        {/* <Appbar.BackAction onPress={()=>{ console.log('GoBack')}} /> */}
+                        <Appbar.Content title="Consulta por Texto" />
+                    </Appbar.Header>
+                    <SafeAreaView>
+                        <TextInput 
+                            label={'Texto'}
+                            value={texto}
+                            onChangeText={(newText) => updateTexto(newText)}
+                        />
 
-            <Button theme={{ colors: theme.colors.primary }} buttonColor="#148F77" textColor="#FFF" mode="elevated" onPress={() => openDataInicial(true)}>Data Inicial</Button>
-            <Button buttonColor="#148F77" textColor="#FFF" mode="elevated" onPress={() => openDataFinal(true)}>Data Final</Button>
+                        <Button 
+                            compact={true} 
+                            theme={{ colors: theme.colors.primary }} 
+                            textColor={DefaultTheme.colors.primary} 
+                            mode="text" 
+                            icon="calendar"
+                            onPress={() => openDataInicial(true)}>
+                                Data Inicial
+                        </Button>
+                        <Button 
+                            compact={true} 
+                            textColor={ DefaultTheme.colors.primary }
+                            mode="text" 
+                            onPress={() => openDataFinal(true)}
+                            icon="calendar">
+                            Data Final
+                        </Button>
 
-            <DatePicker
-                modal
-                title='Data Inicial'
-                open={tagDataInicial}
-                date={dataInicial} 
-                mode="date"
-                locale={'pt_BR'} 
-                onConfirm={(date) => {
-                    console.log("DAta:", date);
-                    openDataInicial(false)
-                    updateDataInicial(date)
-                }}
-                onCancel={ () => { openDataInicial(false)}}
-                confirmText="Confirma"
-                cancelText="Cancela"
-            />
+                        <DatePicker
+                            modal
+                            title='Data Inicial'
+                            open={tagDataInicial}
+                            date={dataInicial} 
+                            mode="date"
+                            locale={'pt_BR'} 
+                            onConfirm={(date) => {
+                                console.log("DAta:", date);
+                                openDataInicial(false)
+                                updateDataInicial(date)
+                            }}
+                            onCancel={ () => { openDataInicial(false)}}
+                            confirmText="Confirma"
+                            cancelText="Cancela"
+                        />
 
-            <DatePicker
-                modal
-                title='Data Final'
-                open={tagDataFinal}
-                date={dataFinal} 
-                mode="date"
-                locale="pt_BR"
-                onConfirm={(date) => {
-                    openDataFinal(false)
-                    updateDataFinal(date)
-                }}
-                onCancel={ () => { openDataFinal(false)}}
-                confirmText="Confirma"
-                cancelText="Cancela"
-            />
+                        <DatePicker
+                            modal
+                            title='Data Final'
+                            open={tagDataFinal}
+                            date={dataFinal} 
+                            mode="date"
+                            locale="pt_BR"
+                            onConfirm={(date) => {
+                                openDataFinal(false)
+                                updateDataFinal(date)
+                            }}
+                            onCancel={ () => { openDataFinal(false)}}
+                            confirmText="Confirma"
+                            cancelText="Cancela"
+                        />
 
-            <Button mode="contained" onPress={() => consultaDiario()}>Consultar</Button>
-            <ListaDiarios dados={ objDiario } navigation={ navigation }  />
-        </SafeAreaView>
+                        <Button mode="contained" onPress={() => consultaDiario()}>Consultar</Button>
+                    </SafeAreaView>
+                </Surface>
+            </ThemeProvider>
+        </Provider>
     );
 };
 
@@ -92,4 +121,4 @@ const style = StyleSheet.create({
     }
 });
 
-export default withTheme(SettingsScreen);
+export default withTheme(BuscaPorTexto);
