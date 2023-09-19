@@ -3,15 +3,12 @@ import { SafeAreaView } from "react-native";
 import { useGetDiarios } from "../../useGetDiarios";
 import ListaDiarios from "../ListaDiarios";
 
-
 const Home = ({ navigation }) => {
-    const {objDiarios} = useGetDiarios();
-    
+    const { objDiarios } = useGetDiarios();
     return (
         <SafeAreaView>
-            <ListaDiarios dados={ objDiarios } navigation={navigation} />
+            <ListaDiarios dados={ objDiarios.data } navigation={navigation} />
         </SafeAreaView>
-        
     )
 };
 

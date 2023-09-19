@@ -1,7 +1,8 @@
 import { useGetDiariosPorConsulta } from "../../useGetDiariosPorConsulta";
-import { SafeAreaView, StatusBar } from "react-native";
+import { Alert, SafeAreaView, StatusBar, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Button, Searchbar, ThemeProvider, Provider, Surface, Appbar, DefaultTheme } from "react-native-paper";
+import styles from "../Diario/styles";
 
 const BuscaPorEdicao = ({ navigation }) => {
 
@@ -15,8 +16,12 @@ const BuscaPorEdicao = ({ navigation }) => {
         console.log("Buscando Diários por Edição");
 
         useGetDiariosPorConsulta(parametrosDaConsulta, baseUrl).then(data => {
-            console.log(data)
-            setDiario(data.diarios);
+            console.log("Status:", data.status)
+            if(data.status==true) {
+                setDiario(data.diarios);
+            } else {
+                Alert.alert(data.message);
+            }
         }).catch(err => console.log(err.request));
     }
 
@@ -26,7 +31,6 @@ const BuscaPorEdicao = ({ navigation }) => {
         }
     }, [objDiario]);
     
-    // console.log(objDiario)
     return (
         <Provider theme={ DefaultTheme }>
             <ThemeProvider theme={ DefaultTheme }>
@@ -38,14 +42,15 @@ const BuscaPorEdicao = ({ navigation }) => {
                         {/* <Appbar.BackAction onPress={()=>{ console.log('GoBack')}} /> */}
                         <Appbar.Content title="Consulta por Edição" />
                     </Appbar.Header>
-                    <SafeAreaView>
+                    <SafeAreaView style={ styles.container }>
                         <Searchbar 
-                        label={'Edição'}
-                        value={edicao}
-                        onChangeText={(newEdicao) => updateEdicao(newEdicao)}
+                            label={'Edição'}
+                            value={edicao}
+                            onChangeText={(newEdicao) => updateEdicao(newEdicao)}
                         />
-                        <Button buttonColor="#0000FF" textColor="#FFF" onPress={() => consultaDiario()}>Consultar</Button>
-                        {/* <ListaDiarios dados={ objDiario } navigation={ navigation }  /> */}
+                        <View style={ styles.button }>
+                            <Button icon="magnify" mode="contained" onPress={() => consultaDiario()}>Consultar</Button>
+                        </View>
                     </SafeAreaView>
                 </Surface>
             </ThemeProvider>

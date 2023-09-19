@@ -1,9 +1,8 @@
 import { useGetDiariosPorConsulta } from "../../useGetDiariosPorConsulta";
-import { SafeAreaView, StatusBar } from "react-native";
+import { Alert, SafeAreaView, StatusBar } from "react-native";
 import { Appbar, Button, DefaultTheme, Provider, Surface, TextInput, ThemeProvider, useTheme } from "react-native-paper";
 
 import React, { useEffect, useState } from "react";
-import ListaDiarios from "../ListaDiarios";
 import DropDown from "react-native-paper-dropdown";
 
 
@@ -21,7 +20,11 @@ const BuscaPorDoc = ({ navigation }) => {
         const dados = useGetDiariosPorConsulta(parametrosDaConsulta, baseUrl)
             .then(data => {
                 console.log(data)
-                setObjDiarios(data.diarios);
+                if(data.status==true) {
+                    setObjDiarios(data.diarios);
+                } else {
+                    Alert.alert(data.message);
+                }
             }).catch(err => console.log(err.message));
     }
 
