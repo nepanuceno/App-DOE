@@ -16,6 +16,8 @@ interface Params {
 
 const Diario = (props: Params) => {
 
+    console.log(props);
+
     const uri = `https://doe.to.gov.br/diario/${props.id}/imagem`;
     
     return (
@@ -33,10 +35,12 @@ const Diario = (props: Params) => {
             <View style={styles.comandos}>
                 <Text style={styles.textComandos}>Nº: {props.edicao}</Text>
                 <Text style={styles.textComandos}>{props.paginas} pág</Text>
-                <Text style={styles.textComandos}>{props.downloads} </Text>
+                <Text style={styles.textComandos}>
+                    {props.downloads} 
+                    <MaterialCommunityIcons name="download" color='#FFF' size={22} />
+                </Text>
                 <Text style={styles.textComandos}>
                     {props.tamanho}
-                    <MaterialCommunityIcons name="download" color='#FFF' size={22} />
                 </Text>
             </View>
         </View>

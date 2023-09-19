@@ -8,7 +8,17 @@ const Doe = () => {
     return (
         <SafeAreaView>
             <FlatList data={dados} renderItem={({item}) => (
-                <Diario id={item.id} edicao={item.edicao} data={item.data} suplemento={item.suplemento} paginas={item.paginas} tamanho={item.tamanho} downloads={item.downloads} link={item.link} imagem={item.imagem}></Diario>
+                <Diario 
+                    id={item.id} 
+                    edicao={item.edicao} 
+                    data={item.data} 
+                    suplemento={item.suplemento} 
+                    paginas={item.paginas} 
+                    tamanho={item.tamanho} 
+                    downloads={item.downloads} 
+                    link={item.link} 
+                    imagem={item.imagem}> 
+                </Diario>
             ) } />
         </SafeAreaView>
     )

@@ -42,18 +42,7 @@ const ViewDoe = ({ route, navigation }) => {
                 }}
                 style={styles.pdf}/>
         </View>
-    )
-
-    // const { id } = route.params;
-    // return (
-    //     <SafeAreaView>
-    //         <View>
-
-    //         </View>
-    //     </SafeAreaView>
-    // )
-
-    
+    );
 };
 
 export default ViewDoe;
