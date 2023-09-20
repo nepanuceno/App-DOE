@@ -33,6 +33,7 @@
     "react-native-screens": "^3.25.0",
     "react-native-vector-icons": "^10.0.0",
     "reinput": "^3.7.2",
+    "yarn": "^1.22.19",
     "yup": "^1.2.0"
   },
   "devDependencies": {
