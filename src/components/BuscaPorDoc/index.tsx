@@ -1,9 +1,10 @@
 import { useGetDiariosPorConsulta } from "../../useGetDiariosPorConsulta";
-import { Alert, SafeAreaView, StatusBar } from "react-native";
+import { Alert, SafeAreaView, StatusBar, View } from "react-native";
 import { Appbar, Button, DefaultTheme, Provider, Surface, TextInput, ThemeProvider, useTheme } from "react-native-paper";
 
 import React, { useEffect, useState } from "react";
 import DropDown from "react-native-paper-dropdown";
+import styles from "../Diario/styles";
 
 
 const BuscaPorDoc = ({ navigation }) => {
@@ -27,7 +28,15 @@ const BuscaPorDoc = ({ navigation }) => {
                 } else {
                     Alert.alert(data.message);
                 }
-            }).catch(err => console.log(err.message));
+            }).catch(err => {
+                console.log("ERRO GRAVE",err.toString())
+                if (err.request._response != null) {
+                    Alert.alert("Erro ao Consultar", err.request._response);
+                } else {
+                    Alert.alert("Erro ao Grave", "Ocorreu um erro ao consultar. Por favor, tente mais tarde.");
+                }
+            }
+            );
     }
 
     useEffect(() => {
@@ -64,7 +73,10 @@ const BuscaPorDoc = ({ navigation }) => {
                                 value={numDoc}
                                 onChangeText={(num) => setNumDoc(num)}
                             />
-                            <Button icon="magnify" mode="contained" onPress={() => sendParams()}>Consultar Diários</Button>
+                            <View style={ styles.button }>
+                                <Button icon="magnify" mode="contained" onPress={() => sendParams()}>Consultar Diários</Button>
+                            </View>
+                                
                         </SafeAreaView>
                 </Surface>
             </ThemeProvider>

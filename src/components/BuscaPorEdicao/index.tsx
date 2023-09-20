@@ -22,7 +22,14 @@ const BuscaPorEdicao = ({ navigation }) => {
             } else {
                 Alert.alert(data.message);
             }
-        }).catch(err => console.log(err.request));
+        }).catch(err => {
+            console.log("ERRO GRAVE",err.toString())
+            if (err.request._response != null) {
+                Alert.alert("Erro ao Consultar", err.request._response);
+            } else {
+                Alert.alert("Erro ao Grave", "Ocorreu um erro ao consultar. Por favor, tente mais tarde.");
+            }
+        });
     }
 
     useEffect(() => {
@@ -44,8 +51,10 @@ const BuscaPorEdicao = ({ navigation }) => {
                     </Appbar.Header>
                     <SafeAreaView style={ styles.container }>
                         <Searchbar
+                            mode="view"
                             label={'Edição'}
                             value={edicao}
+                            placeholder="Edição a consultar"
                             onChangeText={(newEdicao) => updateEdicao(newEdicao)}
                         />
                         <View style={ styles.button }>

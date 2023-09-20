@@ -1,10 +1,11 @@
 import { useGetDiariosPorConsulta } from "../../useGetDiariosPorConsulta";
-import { Alert, SafeAreaView, StatusBar, StyleSheet } from "react-native";
+import { Alert, SafeAreaView, StatusBar, StyleSheet, View } from "react-native";
 import { Appbar, Provider, Surface, ThemeProvider, DefaultTheme, useTheme, withTheme } from "react-native-paper";
 
 import React, { useEffect, useState } from "react";
 import { Button, Text, TextInput } from "react-native-paper";
 import DatePicker from "react-native-date-picker";
+import styles from "../Diario/styles";
 
 
 const BuscaPorTexto = ({ navigation }) => {
@@ -35,7 +36,14 @@ const BuscaPorTexto = ({ navigation }) => {
             } else {
                 Alert.alert(data.message);
             }
-        }).catch(err => console.log(err.message));
+        }).catch(err => {
+            console.log("ERRO GRAVE",err.toString())
+            if (err.request._response != null) {
+                Alert.alert("Erro ao Consultar", err.request._response);
+            } else {
+                Alert.alert("Erro ao Grave", "Ocorreu um erro ao consultar. Por favor, tente mais tarde.");
+            }
+        });
     }
 
     useEffect(() => {
@@ -62,23 +70,28 @@ const BuscaPorTexto = ({ navigation }) => {
                             onChangeText={(newText) => updateTexto(newText)}
                         />
 
-                        <Button 
-                            compact={true} 
-                            theme={{ colors: theme.colors.primary }} 
-                            textColor={DefaultTheme.colors.primary} 
-                            mode="text" 
-                            icon="calendar"
-                            onPress={() => openDataInicial(true)}>
-                                Data Inicial
-                        </Button>
-                        <Button 
-                            compact={true} 
-                            textColor={ DefaultTheme.colors.primary }
-                            mode="text" 
-                            onPress={() => openDataFinal(true)}
-                            icon="calendar">
-                            Data Final
-                        </Button>
+                        <View style={ styles.button }>
+                            <Button 
+                                compact={true} 
+                                theme={{ colors: theme.colors.primary }} 
+                                textColor={DefaultTheme.colors.primary} 
+                                mode="text" 
+                                icon="calendar"
+                                onPress={() => openDataInicial(true)}>
+                                    Data Inicial
+                            </Button>
+                        </View>
+
+                        <View style={ styles.button }>
+                            <Button 
+                                compact={true} 
+                                textColor={ DefaultTheme.colors.primary }
+                                mode="text" 
+                                onPress={() => openDataFinal(true)}
+                                icon="calendar">
+                                Data Final
+                            </Button>
+                        </View>
 
                         <DatePicker
                             modal
@@ -113,7 +126,9 @@ const BuscaPorTexto = ({ navigation }) => {
                             cancelText="Cancela"
                         />
 
-                        <Button mode="contained" onPress={() => consultaDiario()}>Consultar</Button>
+                        <View style={ styles.button }>
+                            <Button mode="contained" onPress={() => consultaDiario()}>Consultar</Button>
+                        </View>
                     </SafeAreaView>
                 </Surface>
             </ThemeProvider>
