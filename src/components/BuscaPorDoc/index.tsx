@@ -16,7 +16,9 @@ const BuscaPorDoc = ({ navigation }) => {
 
     const sendParams = () => {
         const parametrosDaConsulta = { por:'doc', 'tipo-documento': numTipoDoc, numero: numDoc }
-        const baseUrl = 'http://localhost:8080';    
+        // const baseUrl = 'http://localhost:8080';    
+        const baseUrl = 'http://10.113.254.110:8080/';    
+
         const dados = useGetDiariosPorConsulta(parametrosDaConsulta, baseUrl)
             .then(data => {
                 console.log(data)

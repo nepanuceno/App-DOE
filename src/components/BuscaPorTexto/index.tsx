@@ -8,7 +8,9 @@ import DatePicker from "react-native-date-picker";
 
 
 const BuscaPorTexto = ({ navigation }) => {
-    const baseUrl = 'http://localhost:8080';    
+    // const baseUrl = 'http://localhost:8080';    
+    const baseUrl = 'http://10.113.254.110:8080/';    
+
 
     const date = new Date();
     date.setDate(date.getDate() - 60);

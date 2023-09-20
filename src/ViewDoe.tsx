@@ -27,6 +27,7 @@ const ViewDoe = ({ route, navigation }) => {
     return (
         <View style={styles.container}>
             <Pdf
+            trustAllCerts={false}
                 source={source}
                 onLoadComplete={(numberOfPages,filePath) => {
                     console.log(`Number of pages: ${numberOfPages}`);

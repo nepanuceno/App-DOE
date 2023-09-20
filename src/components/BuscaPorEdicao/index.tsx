@@ -9,7 +9,7 @@ const BuscaPorEdicao = ({ navigation }) => {
     const [objDiario, setDiario] = useState(undefined);
     const [edicao, updateEdicao] = useState('');
 
-    const baseUrl = 'http://localhost:8080';    
+    const baseUrl = 'http://10.113.254.110:8080/';    
     
     const consultaDiario = () => {
         const parametrosDaConsulta = { por:'edicao', edicao: edicao }
@@ -43,7 +43,7 @@ const BuscaPorEdicao = ({ navigation }) => {
                         <Appbar.Content title="Consulta por Edição" />
                     </Appbar.Header>
                     <SafeAreaView style={ styles.container }>
-                        <Searchbar 
+                        <Searchbar
                             label={'Edição'}
                             value={edicao}
                             onChangeText={(newEdicao) => updateEdicao(newEdicao)}
