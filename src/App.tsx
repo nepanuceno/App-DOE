@@ -13,7 +13,6 @@ const App = () => {
                 <MyTabs />
             </SafeAreaProvider>
         </NavigationContainer>
-        // <DownloadDoe />
     )
 };
 

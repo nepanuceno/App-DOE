@@ -2,6 +2,7 @@ import { Image, Text, TouchableOpacity, View } from "react-native";
 import styles from "./styles";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { useDownloadDiario } from "../../useDownloadDiario";
+import { Divider } from "react-native-paper";
 // import useDownloadDiario from "../../useDownloadDiario";
 
 interface Params {
@@ -18,8 +19,6 @@ interface Params {
 }
 
 const Diario = (props: Params) => {
-
-    console.log("##############: ",props);
 
     const uri = `https://doe.to.gov.br/diario/${props.id}/imagem`;
     const uriFile = `https://doe.to.gov.br/diario/${props.id}/download`;
@@ -71,6 +70,7 @@ const Diario = (props: Params) => {
                         </Text>
                 </TouchableOpacity>
             </View>
+            <Divider />
         </View>
     );
 };
