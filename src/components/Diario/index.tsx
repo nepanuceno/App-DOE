@@ -1,6 +1,8 @@
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import styles from "./styles";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { useDownloadDiario } from "../../useDownloadDiario";
+// import useDownloadDiario from "../../useDownloadDiario";
 
 interface Params {
     id: number,
@@ -20,10 +22,16 @@ const Diario = (props: Params) => {
     console.log("##############: ",props);
 
     const uri = `https://doe.to.gov.br/diario/${props.id}/imagem`;
+    const uriFile = `https://doe.to.gov.br/diario/${props.id}/download`;
 
     const onPress = (id: number) => {
         console.log('Abrindo Diario Oficial');
         props.navigation.navigate('DOE Detalhado', {name: 'ViewDoe', id: id});
+    }
+
+    const onDownlod = (uri:string) => {
+        console.log("Baixando DOE", uri)
+        useDownloadDiario(uri, props.edicao);
     }
     
     return (
@@ -43,7 +51,13 @@ const Diario = (props: Params) => {
                 <Text style={styles.textComandos}>{props.paginas} pág</Text>
                 <Text style={styles.textComandos}>
                     {props.downloads} 
-                    <MaterialCommunityIcons name="download" color='#FFF' size={20} />
+                    <TouchableOpacity
+                        activeOpacity={0.7}
+                        onPress={() => onDownlod(uriFile)} >
+                        <Text style={styles.textComandos}>
+                            <MaterialCommunityIcons name="download" color='#FFF' size={20} />
+                        </Text>
+                </TouchableOpacity>
                 </Text>
                 
                 <Text style={styles.textComandos}>
