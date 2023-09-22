@@ -18,6 +18,7 @@ const BuscaPorEdicao = ({ navigation }) => {
         useGetDiariosPorConsulta(parametrosDaConsulta, baseUrl).then(data => {
             console.log("Status:", data.status)
             if(data.status==true) {
+                console.log(data)
                 setDiario(data.diarios);
             } else {
                 Alert.alert(data.message);
@@ -34,6 +35,7 @@ const BuscaPorEdicao = ({ navigation }) => {
 
     useEffect(() => {
         if (objDiario != undefined){
+            console.log("Diário Enviado: ",objDiario)
             navigation.navigate('Resultado', {name: 'ResultDiarios', objDiarios: objDiario});
         }
     }, [objDiario]);

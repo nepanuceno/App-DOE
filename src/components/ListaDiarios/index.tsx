@@ -1,17 +1,12 @@
-import { FlatList, RefreshControl, View } from "react-native";
-
+import { FlatList, View } from "react-native";
 import Diario from "../Diario";
-import { useGetDiarios } from "../../useGetDiarios";
-import { useCallback, useEffect, useState } from "react";
-
 interface Params {
+    dados: object
     navigation: object
 };
 
-
 const ListaDiarios = ( props: Params ) => {
-    const { objDiarios } = useGetDiarios();
-    const dados = objDiarios.data;
+    const dados = props.dados
     return (
         <FlatList 
             data={dados}
@@ -36,7 +31,3 @@ const ListaDiarios = ( props: Params ) => {
 }
 
 export default ListaDiarios;
-
-function componentDidMount() {
-    throw new Error("Function not implemented.");
-}
