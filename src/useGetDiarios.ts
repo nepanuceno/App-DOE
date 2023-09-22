@@ -1,25 +1,12 @@
-import { useEffect, useState } from "react";
 import axios from 'axios';
 
-export const useGetDiarios = () => {
-    const [objDiarios, newDados] = useState({});
+export const useGetDiarios = (baseUrl:string) => {    
+    const promise = axios({
+      method: 'get',
+      url: `${baseUrl}`,
+    });
     
-    const baseUrl = 'https://diariooficial.to.gov.br/api.json';
-    useEffect(() => {
-        console.log("Buscando Diários recentes");
-        axios({
-          method: 'get',
-          url: `${baseUrl}`,
-        }).then((response) => {
-            if(response.status === 200){
-              newDados(response)
-            }else{
-              console.log(response)
-            }
-        });
-    }, []);
-
-    return {
-      objDiarios,
-    }
+    const resp =  promise.then((response) => response );
+    
+    return resp;
 }
