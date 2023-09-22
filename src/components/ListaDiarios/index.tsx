@@ -10,27 +10,8 @@ interface Params {
 
 
 const ListaDiarios = ( props: Params ) => {
-    const  objDiarios = useGetDiarios().objDiarios;
-    const [objDiariosList, setDiariosList] = useState(objDiarios);
-    const [refreshing, setRefreshing] = useState(false);
-
-    console.log(objDiariosList)
-
-    useEffect(() => {
-            if (refreshing == true) {
-                setDiariosList(useGetDiarios().objDiarios);
-            }
-    },[refreshing]);
-    
-    const onRefresh = () => {
-        setRefreshing(true)
-        console.log("Refresh")
-    };
-
- 
-
-
-    const dados = objDiariosList.data;
+    const { objDiarios } = useGetDiarios();
+    const dados = objDiarios.data;
     return (
         <FlatList 
             data={dados}
@@ -50,9 +31,6 @@ const ListaDiarios = ( props: Params ) => {
                 />
             </View>
         )}
-        refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
         />
     );
 }
