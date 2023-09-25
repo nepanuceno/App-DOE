@@ -1,4 +1,4 @@
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import { Image, Linking, Share, Text, TouchableOpacity, View } from "react-native";
 import styles from "./styles";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { useDownloadDiario } from "../../useDownloadDiario";
@@ -32,6 +32,31 @@ const Diario = (props: Params) => {
         console.log("Baixando DOE", uri)
         useDownloadDiario(uri, props.edicao);
     }
+
+    const shareMessage = async (message:string) => { 
+        try {
+          const result = await Share.share({
+            message: message,
+          });
+          if (result.action === Share.sharedAction) {
+            if (result.activityType) {
+              console.log("compartilhado com o tipo de atividade de: " + result.activityType);
+            } else {
+              console.log("compartilhado");
+            }
+          } else if (result.action === Share.dismissedAction) {
+            console.log("descartado");
+          }
+        } catch (error) {
+          alert(error.message);
+        }
+      };
+    
+
+        const onShare = (link:string) => {
+            Linking.openURL (`whatsapp://send?text=Olha o DOE ai!`);
+        }
+
     
     return (
         <View style={styles.container}>
@@ -69,6 +94,13 @@ const Diario = (props: Params) => {
                             <MaterialCommunityIcons name="eye" color='#FFF' size={30} />
                         </Text>
                 </TouchableOpacity>
+                <TouchableOpacity
+                        activeOpacity={0.7}
+                        onPress={() => shareMessage(props.link)} >
+                        <Text style={styles.textComandos}>
+                            <MaterialCommunityIcons name="share" color='#FFF' size={30} />
+                        </Text>
+                </TouchableOpacity>
             </View>
             <Divider />
         </View>
@@ -76,3 +108,7 @@ const Diario = (props: Params) => {
 };
 
 export default Diario;
+
+function alert(message: any) {
+    throw new Error("Function not implemented.");
+}
