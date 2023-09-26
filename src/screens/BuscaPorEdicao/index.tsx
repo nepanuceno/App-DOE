@@ -1,8 +1,8 @@
-import { useGetDiariosPorConsulta } from "../../useGetDiariosPorConsulta";
+import { useGetDiariosPorConsulta } from "../../services/useGetDiariosPorConsulta";
 import { Alert, SafeAreaView, StatusBar, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Button, Searchbar, ThemeProvider, Provider, Surface, Appbar, DefaultTheme } from "react-native-paper";
-import styles from "../Diario/styles";
+import styles from "../../components/Diario";
 
 const BuscaPorEdicao = ({ navigation }) => {
 

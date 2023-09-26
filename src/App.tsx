@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { NavigationContainer } from "@react-navigation/native";
 
-import MyTabs from './MyTabs';
+import MyTabs from './components/MyTabs';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 const App = () => {

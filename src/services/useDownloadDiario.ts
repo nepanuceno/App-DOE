@@ -1,5 +1,5 @@
 import { downloadFile } from "./DownloadFile";
-import { checkPermission } from "./checkPermission";
+import { checkPermission } from "../utils/checkPermission";
 
 export const useDownloadDiario = (url:string, edicao:string) => {
 

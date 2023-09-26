@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     }
 });
 
-const ViewDoe = ({ route, navigation }) => {
+const ViewDoe = ({ route }) => {
 
     console.log("Route:", route.params);
 
@@ -27,7 +27,7 @@ const ViewDoe = ({ route, navigation }) => {
     return (
         <View style={styles.container}>
             <Pdf
-            trustAllCerts={false}
+                trustAllCerts={false}
                 source={source}
                 onLoadComplete={(numberOfPages,filePath) => {
                     console.log(`Number of pages: ${numberOfPages}`);
@@ -41,7 +41,8 @@ const ViewDoe = ({ route, navigation }) => {
                 onPressLink={(uri) => {
                     console.log(`Link pressed: ${uri}`);
                 }}
-                style={styles.pdf}/>
+                style={styles.pdf}
+            />
         </View>
     );
 };

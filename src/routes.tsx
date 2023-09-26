@@ -1,12 +1,12 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import Home from './components/Home';
-import ViewDoe from './ViewDoe';
+import Home from './screens/Home';
+import ViewDoe from './components/ViewDoe';
 import ResultDiarios from './components/ResultDiarios';
 
 const Stack = createNativeStackNavigator();
 
-const MyHomeStack = () => {
+const Routes = () => {
     return (
         <Stack.Navigator>
             <Stack.Screen name="Home" component={Home} options={{title: 'DOE - Últimas Edições'}} />
@@ -16,4 +16,4 @@ const MyHomeStack = () => {
     );
 };
 
-export default MyHomeStack;
+export default Routes;

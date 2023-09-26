@@ -1,6 +1,6 @@
 import { Alert, SafeAreaView } from "react-native";
-import ListaDiarios from "../ListaDiarios";
-import { useGetDiarios } from "../../useGetDiarios"
+import ListaDiarios from "../../components/ListaDiarios";
+import { useGetDiarios } from "../../services/useGetDiarios"
 import { useEffect, useState } from "react";
 
 const Home = ({ navigation }) => {
@@ -11,7 +11,6 @@ const Home = ({ navigation }) => {
     const getDiarios = () => {
         const dados = useGetDiarios(baseUrl).then((response:object) => {
             if(response.status==200) {
-                console.log("VEio")
                 setObjDiarios(response.data);
             } else {
                 Alert.alert("ERRO!",response.message);

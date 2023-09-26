@@ -1,18 +1,15 @@
-import { useGetDiariosPorConsulta } from "../../useGetDiariosPorConsulta";
-import { Alert, SafeAreaView, StatusBar, StyleSheet, View } from "react-native";
+import { useGetDiariosPorConsulta } from "../../services/useGetDiariosPorConsulta";
+import { Alert, SafeAreaView, StatusBar, View } from "react-native";
 import { Appbar, Provider, Surface, ThemeProvider, DefaultTheme, useTheme, withTheme } from "react-native-paper";
 import moment from 'moment';
 import React, { useEffect, useState } from "react";
 import { Button, Text, TextInput } from "react-native-paper";
 import DatePicker from "react-native-date-picker";
-import styles from "../Diario/styles";
+import styles from "../../components/Diario"
 
 
 const BuscaPorTexto = ({ navigation }) => {
-    // const baseUrl = 'http://localhost:8080';    
-    const baseUrl = 'http://10.113.254.110:8080/';    
-
-
+    const baseUrl = 'http://10.113.254.110:8080/';
     const date = new Date();
     date.setDate(date.getDate() - 60);
 

@@ -1,11 +1,11 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import MyHomeStack from "./MyHomeStack";
-import SettingsScreen from "./SettingsScreen";
-import BuscaPorTexto from './components/BuscaPorTexto';
-import BuscaPorDoc from './components/BuscaPorDoc';
-import BuscaPorEdicao from './components/BuscaPorEdicao';
+import Routes from "../routes";
+import BuscaPorTexto from '../screens/BuscaPorTexto';
+import BuscaPorDoc from '../screens/BuscaPorDoc';
+import BuscaPorEdicao from '../screens/BuscaPorEdicao';
+import Configuracoes from '../screens/Configuracoes';
 
 const Tab = createBottomTabNavigator();
 
@@ -14,7 +14,7 @@ const MyTabs = () => {
         <Tab.Navigator screenOptions={{ headerShown: false }}>
           <Tab.Screen
               name="Principal"
-              component={MyHomeStack}
+              component={Routes}
               options={
                 { 
                     tabBarIcon: ({ color }) => (
@@ -61,7 +61,7 @@ const MyTabs = () => {
           />
           <Tab.Screen 
               name="Configurações"
-              component={SettingsScreen}
+              component={Configuracoes}
               options={
                   {
                       tabBarLabel: 'Configurações',

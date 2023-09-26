@@ -1,7 +1,7 @@
 import { Image, Linking, Share, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import styles from "./styles";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { useDownloadDiario } from "../../useDownloadDiario";
+import { useDownloadDiario } from "../../services/useDownloadDiario";
 import { Card } from "react-native-paper";
 
 interface Params {
