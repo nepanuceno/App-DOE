@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         width: 320,
         height: 450,
+        borderRadius:2,
     },
     pagina: {
         padding: 0,
@@ -33,15 +34,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         margin: 0,
-        width: 300
+        width: 300,
     },
     topo: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#2471A3',
+        backgroundColor: '#000080',
         height: 40,
         verticalAlign: 'middle',
+        borderTopRightRadius: 10,
+        borderTopLeftRadius: 10
     },
 
     comandos: {
@@ -50,7 +53,7 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         alignItems: 'center',
         justifyContent: 'space-evenly',
-        backgroundColor: '#2471A3',
+        backgroundColor: '#000080',
         paddingTop: 5,
         paddingBottom: 5,
     },

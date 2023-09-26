@@ -1,9 +1,8 @@
-import { Image, Linking, Share, Text, TouchableOpacity, View } from "react-native";
+import { Image, Linking, Share, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import styles from "./styles";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { useDownloadDiario } from "../../useDownloadDiario";
-import { Card, Divider } from "react-native-paper";
-// import useDownloadDiario from "../../useDownloadDiario";
+import { Card } from "react-native-paper";
 
 interface Params {
     id: number,
@@ -61,50 +60,41 @@ const Diario = (props: Params) => {
     return (
         <Card style={ {margin: 5} }>
             <Card.Content>
-            <View style={styles.topo}>
-                <Text style={styles.textData}>{props.data}</Text>
-            </View>
-            <View style={styles.diario} >
-                <View style={styles.pagina}>
-                    <Image 
-                        source={{ uri: uri }} 
-                        style={styles.tinyLogo} />
+                <View style={styles.topo}>
+                    <Text style={styles.textData}>{props.data}</Text>
                 </View>
-            </View>
-            <View style={styles.comandos}>
-                <Text style={styles.textComandos}>Nº: {props.edicao}</Text>
-                <Text style={styles.textComandos}>{props.paginas} pág</Text>
-                <Text style={styles.textComandos}>
-                    {props.downloads} 
-                    <TouchableOpacity
-                        activeOpacity={0.7}
-                        onPress={() => onDownlod(uriFile)} >
+                <View style={styles.diario} >
+                    <View style={styles.pagina}>
+                        <Image source={{ uri: uri }} style={styles.tinyLogo} />
+                    </View>
+                </View>
+                <View style={styles.comandos}>
+                    <Text style={styles.textComandos}>Nº: {props.edicao}</Text>
+                    <Text style={styles.textComandos}>{props.paginas} pág</Text>
+                    <Text style={styles.textComandos}>
+                        {props.downloads} 
+                        <TouchableOpacity activeOpacity={0.7} onPress={() => onDownlod(uriFile)} >
+                            <Text style={styles.textComandos}>
+                                <MaterialCommunityIcons name="download" color='#FFF' size={20} />
+                            </Text>
+                        </TouchableOpacity>
+                    </Text>
+                    
+                    <Text style={styles.textComandos}>
+                        {props.tamanho}
+                    </Text>
+                    <TouchableOpacity activeOpacity={0.7} onPress={() => onPress(props.id)} style={stylesButton.touchableOpacityStyleEye} >
                         <Text style={styles.textComandos}>
-                            <MaterialCommunityIcons name="download" color='#FFF' size={20} />
+                            <MaterialCommunityIcons name="eye" color='#FFE4E1' size={30} />
                         </Text>
-                </TouchableOpacity>
-                </Text>
-                
-                <Text style={styles.textComandos}>
-                    {props.tamanho}
-                </Text>
-                <TouchableOpacity
-                        activeOpacity={0.7}
-                        onPress={() => onPress(props.id)} >
+                    </TouchableOpacity>
+                    <TouchableOpacity activeOpacity={0.7} onPress={() => shareMessage(props.link)} style={stylesButton.touchableOpacityStyleShare }>
                         <Text style={styles.textComandos}>
-                            <MaterialCommunityIcons name="eye" color='#FFF' size={30} />
+                            <MaterialCommunityIcons name="share" color='#FFE4E1' size={30} />
                         </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                        activeOpacity={0.7}
-                        onPress={() => shareMessage(props.link)} >
-                        <Text style={styles.textComandos}>
-                            <MaterialCommunityIcons name="share" color='#FFF' size={30} />
-                        </Text>
-                </TouchableOpacity>
-            </View>
+                    </TouchableOpacity>
+                </View>
             </Card.Content>
-            
         </Card>
     );
 };
@@ -114,3 +104,34 @@ export default Diario;
 function alert(message: any) {
     throw new Error("Function not implemented.");
 }
+
+const stylesButton = StyleSheet.create({
+    touchableOpacityStyleShare: {
+      position: 'absolute',
+      width: 40,
+      height: 40,
+      alignItems: 'center',
+      justifyContent: 'center',
+      right: -20,
+      bottom: 90,
+      backgroundColor: '#DA70D6',
+      borderRadius: 50,
+    },
+    touchableOpacityStyleEye: {
+        position: 'absolute',
+        width: 40,
+        height: 40,
+        alignItems: 'center',
+        justifyContent: 'center',
+        right: -20,
+        bottom: 40,
+        backgroundColor: '#DA70D6',
+        borderRadius: 50,
+        
+    },
+    floatingButtonStyle: {
+      resizeMode: 'contain',
+      width: 70,
+      height: 70,
+    },
+});
