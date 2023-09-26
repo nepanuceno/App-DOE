@@ -50,14 +50,13 @@ const BuscaPorDoc = ({ navigation }) => {
             <ThemeProvider theme={ DefaultTheme }>
                 <StatusBar 
                     backgroundColor={DefaultTheme.colors.primary}
-                    // barStyle={"light-content"}
                 />
                 <Surface>
                     <Appbar.Header theme={ { colors: {primary: 'green' } }}>
                         {/* <Appbar.BackAction onPress={()=>{ console.log('GoBack')}} /> */}
                         <Appbar.Content title="Consulta por Documento" />
                     </Appbar.Header>
-                        <SafeAreaView>
+                        <SafeAreaView style={ styles.container }>
                             <DropDown
                                 label={"Tipos de Documento"}
                                 mode={"flat"}
@@ -68,12 +67,12 @@ const BuscaPorDoc = ({ navigation }) => {
                                 setValue={setNumTipoDoc}
                                 list={listaDeTiposDeDocumento}      
                             />
-                            <TextInput 
+                            <TextInput style={ styles.itens } 
                                 label="Número do Documento"
                                 value={numDoc}
                                 onChangeText={(num) => setNumDoc(num)}
                             />
-                            <View style={ styles.button }>
+                            <View style={ styles.itens }>
                                 <Button icon="magnify" mode="contained" onPress={() => sendParams()}>Consultar Diários</Button>
                             </View>
                                 

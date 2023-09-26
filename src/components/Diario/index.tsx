@@ -2,7 +2,7 @@ import { Image, Linking, Share, Text, TouchableOpacity, View } from "react-nativ
 import styles from "./styles";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { useDownloadDiario } from "../../useDownloadDiario";
-import { Divider } from "react-native-paper";
+import { Card, Divider } from "react-native-paper";
 // import useDownloadDiario from "../../useDownloadDiario";
 
 interface Params {
@@ -59,7 +59,8 @@ const Diario = (props: Params) => {
 
     
     return (
-        <View style={styles.container}>
+        <Card style={ {margin: 5} }>
+            <Card.Content>
             <View style={styles.topo}>
                 <Text style={styles.textData}>{props.data}</Text>
             </View>
@@ -102,8 +103,9 @@ const Diario = (props: Params) => {
                         </Text>
                 </TouchableOpacity>
             </View>
-            <Divider />
-        </View>
+            </Card.Content>
+            
+        </Card>
     );
 };
 

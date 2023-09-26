@@ -52,14 +52,14 @@ const BuscaPorEdicao = ({ navigation }) => {
                         <Appbar.Content title="Consulta por Edição" />
                     </Appbar.Header>
                     <SafeAreaView style={ styles.container }>
-                        <Searchbar
-                            mode="view"
+                        <Searchbar style={ styles.itens }
+                            mode="bar"
                             label={'Edição'}
                             value={edicao}
                             placeholder="Edição a consultar"
                             onChangeText={(newEdicao) => updateEdicao(newEdicao)}
                         />
-                        <View style={ styles.button }>
+                        <View style={ styles.itens }>
                             <Button icon="magnify" mode="contained" onPress={() => consultaDiario()}>Consultar</Button>
                         </View>
                     </SafeAreaView>

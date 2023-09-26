@@ -2,12 +2,15 @@ import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
     container: {
-        // shadowColor: '#000000',
-        // shadowOffset: { width: 0, height: 1 },
-        // shadowOpacity: 0.5,
-        // shadowRadius: 20,
-        margin: 10,
+        
+        paddingVertical: 10,
+        paddingHorizontal: 10,
+        width: '100%',
+        height: '100%',
+    },
 
+    itens: {
+        marginTop: 10,
     },
 
     diario: {
@@ -66,7 +69,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#DDDDDD',
         padding: 10,
-      },
+    },
+    
 });
 
 export default styles;

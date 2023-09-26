@@ -1,7 +1,7 @@
 import { useGetDiariosPorConsulta } from "../../useGetDiariosPorConsulta";
 import { Alert, SafeAreaView, StatusBar, StyleSheet, View } from "react-native";
 import { Appbar, Provider, Surface, ThemeProvider, DefaultTheme, useTheme, withTheme } from "react-native-paper";
-
+import moment from 'moment';
 import React, { useEffect, useState } from "react";
 import { Button, Text, TextInput } from "react-native-paper";
 import DatePicker from "react-native-date-picker";
@@ -22,7 +22,8 @@ const BuscaPorTexto = ({ navigation }) => {
     const [dataFinal, updateDataFinal] = useState(new Date());
     const [tagDataInicial, openDataInicial] = useState(false);
     const [tagDataFinal, openDataFinal] = useState(false);
-    const theme = useTheme();
+    
+    
     const parametrosDaConsulta = { por:'texto', texto: texto, 'data-inicial': dataInicial, 'data-final': dataFinal}
    
     const consultaDiario = () => {
@@ -63,34 +64,29 @@ const BuscaPorTexto = ({ navigation }) => {
                         {/* <Appbar.BackAction onPress={()=>{ console.log('GoBack')}} /> */}
                         <Appbar.Content title="Consulta por Texto" />
                     </Appbar.Header>
-                    <SafeAreaView>
-                        <TextInput 
-                            label={'Texto'}
-                            value={texto}
-                            onChangeText={(newText) => updateTexto(newText)}
-                        />
-
-                        <View style={ styles.button }>
-                            <Button 
-                                compact={true} 
-                                theme={{ colors: theme.colors.primary }} 
-                                textColor={DefaultTheme.colors.primary} 
-                                mode="text" 
-                                icon="calendar"
-                                onPress={() => openDataInicial(true)}>
-                                    Data Inicial
-                            </Button>
-                        </View>
-
-                        <View style={ styles.button }>
-                            <Button 
-                                compact={true} 
-                                textColor={ DefaultTheme.colors.primary }
-                                mode="text" 
-                                onPress={() => openDataFinal(true)}
-                                icon="calendar">
-                                Data Final
-                            </Button>
+                    <SafeAreaView >
+                        <View style={styles.container}>
+                            <TextInput style={ styles.itens }
+                                label={'Expressão a procurar'}
+                                value={texto}
+                                onChangeText={(newText) => updateTexto(newText)}
+                            />
+                            <TextInput style={ styles.itens }
+                                label={'Data Inicial'}
+                                value={ moment(dataInicial).format("DD/MM/YYYY") }
+                                onChangeText={(dataInicial) => updateTexto(dataInicial)}
+                                onPressIn={() => openDataInicial(true)}
+                                right={<TextInput.Icon name="calendar" />}
+                            />
+                            <TextInput style={ styles.itens }
+                                label={'Data Final'}
+                                value={ moment(dataFinal).format("DD/MM/YYYY") }
+                                onChangeText={(dataFinal) => updateTexto(dataFinal)}
+                                onPressIn={() => openDataFinal(true)}
+                                right={<TextInput.Icon name="calendar" />}
+                            />
+                
+                            <Button style={ styles.itens } mode="contained" onPress={() => consultaDiario()}>Consultar</Button>
                         </View>
 
                         <DatePicker
@@ -99,9 +95,8 @@ const BuscaPorTexto = ({ navigation }) => {
                             open={tagDataInicial}
                             date={dataInicial} 
                             mode="date"
-                            locale={'pt_BR'} 
+                            locale='pt_BR'
                             onConfirm={(date) => {
-                                console.log("DAta:", date);
                                 openDataInicial(false)
                                 updateDataInicial(date)
                             }}
@@ -126,20 +121,11 @@ const BuscaPorTexto = ({ navigation }) => {
                             cancelText="Cancela"
                         />
 
-                        <View style={ styles.button }>
-                            <Button mode="contained" onPress={() => consultaDiario()}>Consultar</Button>
-                        </View>
                     </SafeAreaView>
                 </Surface>
             </ThemeProvider>
         </Provider>
     );
 };
-
-const style = StyleSheet.create({
-    inputs: {
-        marginTop: 30,
-    }
-});
 
 export default withTheme(BuscaPorTexto);
